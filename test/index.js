@@ -1,56 +1,57 @@
-import chai from 'chai';
-import { Iterable, fromJS } from 'immutable';
-import makeImmutable from '../src/index';
+
+import { expect } from 'chai';
+import { isCollection, toClj } from 'mori';
+import makeMori from '../src/index';
 
 describe('immutable middleware', () => {
   let result;
   const TYPE = 'SOME_TYPE';
-  const notIterable = {
+  const notCollection = {
     values: [1, 2, 3],
   };
 
-  const iterable = fromJS(notIterable);
+  const mCollection = toClj(notCollection);
 
   const FSA = {
     type: TYPE,
-    payload: notIterable,
+    payload: notCollection,
   };
 
-  const immutableFSA = {
+  const moriFSA = {
     type: TYPE,
-    payload: iterable,
+    payload: mCollection,
   };
 
   const notFSA = {
     type: TYPE,
-    values: notIterable.values,
+    values: notCollection.values,
   };
 
   const weirdAction = {
-    payload: notIterable,
+    payload: notCollection,
   };
 
   const doNext = (action) => action;
 
   it('should coerce native types', () => {
-    result = makeImmutable()(doNext)(FSA);
-    chai.expect(Iterable.isIterable(result.payload))
+    result = makeMori()(doNext)(FSA);
+    expect(isCollection(result.payload))
       .to.equal(true);
   });
 
-  it('should ignore immutable types', () => {
-    result = makeImmutable()(doNext)(immutableFSA);
-    chai.expect(result.payload).to.equal(iterable);
+  it('should ignore mori types', () => {
+    result = makeMori()(doNext)(moriFSA);
+    expect(result.payload).to.equal(mCollection);
   });
 
   it('should work with non-standard-actions', () => {
-    result = makeImmutable()(doNext)(notFSA);
-    chai.expect(Iterable.isIterable(result.values))
+    result = makeMori()(doNext)(notFSA);
+    expect(isCollection(result.values))
       .to.equal(true);
   });
 
   it('should forward weird actions', () => {
-    result = makeImmutable()(doNext)(weirdAction);
-    chai.expect(result).to.equal(weirdAction);
+    result = makeMori()(doNext)(weirdAction);
+    expect(result).to.equal(weirdAction);
   });
 });

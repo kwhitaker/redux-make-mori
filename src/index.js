@@ -1,7 +1,7 @@
-import { Iterable, fromJS } from 'immutable';
+import { isCollection, toClj } from 'mori';
 import { isFSA } from 'flux-standard-action';
 
-export default function makeImmutable() {
+export default function makeMori() {
   return next => action => {
     let key;
     let payload;
@@ -18,7 +18,7 @@ export default function makeImmutable() {
       payload = action[key];
     }
 
-    payload = Iterable.isIterable(payload) ? payload : fromJS(payload);
+    payload = isCollection(payload) ? payload : toClj(payload);
     const newAction = Object.assign({}, action, {
       [key]: payload,
     });

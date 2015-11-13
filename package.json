@@ -1,7 +1,7 @@
 {
-  "name": "redux-make-immutable",
-  "version": "1.0.1",
-  "description": "Coerces native Javascript types into Immutable JS types",
+  "name": "redux-make-more",
+  "version": "1.0.0",
+  "description": "Coerces native Javascript types into Mori types",
   "main": "lib/index.js",
   "scripts": {
     "prepublish": "rimraf lib && babel src --out-dir lib",
@@ -9,24 +9,25 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kwhitaker/redux-make-immutable.git"
+    "url": "git+https://github.com/kwhitaker/redux-make-mori.git"
   },
   "keywords": [
     "javascript",
     "react",
     "redux",
     "middleware",
-    "immutable"
+    "immutable",
+    "mori"
   ],
   "author": "Kevin Whitaker",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/kwhitaker/redux-make-immutable/issues"
+    "url": "https://github.com/kwhitaker/redux-make-mori/issues"
   },
-  "homepage": "https://github.com/kwhitaker/redux-make-immutable#readme",
+  "homepage": "https://github.com/kwhitaker/redux-make-mori#readme",
   "dependencies": {
     "flux-standard-action": "^0.6.0",
-    "immutable": "^3.7.5"
+    "mori": "^0.3.2"
   },
   "devDependencies": {
     "babel": "^5.8.23",
@@ -35,6 +36,7 @@
     "chai": "^3.2.0",
     "eslint": "^1.4.3",
     "eslint-config-airbnb": "0.0.8",
+    "eslint-plugin-react": "^3.8.0",
     "mocha": "^2.3.2"
   }
 }
