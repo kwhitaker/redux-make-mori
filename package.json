@@ -1,5 +1,5 @@
 {
-  "name": "redux-make-more",
+  "name": "redux-make-mori",
   "version": "1.0.0",
   "description": "Coerces native Javascript types into Mori types",
   "main": "lib/index.js",
